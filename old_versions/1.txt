@@ -1,0 +1,32 @@
+#include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
+
+byte WifiPortalTimeout=60;
+  // id/name placeholder/prompt default length
+  //WiFiManagerParameter custom_bot_token("bottoken", "Telegram Bot Token", bot_token, 120);
+  //WiFiManagerParameter custom_chat_id("chatid", "Telegram UserID", chat_id, 20);
+
+
+void setup() {
+
+  Serial.begin(115200);
+    
+  WiFiManager wifiManager;
+  //wifiManager.setSaveConfigCallback(saveConfigCallback);
+  //wifiManager.addParameter(&custom_bot_token);
+  //wifiManager.addParameter(&custom_chat_id);
+  wifiManager.setConfigPortalTimeout(WifiPortalTimeout);
+  wifiManager.setDebugOutput(true);
+    if(!wifiManager.autoConnect("Cyber_JET", "12345678")) {
+      Serial.println("failed to connect and hit timeout");
+      delay(3000);
+      ESP.restart();
+      delay(5000);
+    } 
+  Serial.println("connected..");
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
